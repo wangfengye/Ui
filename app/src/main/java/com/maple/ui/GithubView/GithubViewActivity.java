@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.maple.ui.R;
 
 public class GithubViewActivity extends AppCompatActivity {
+    public static final String TITLE = "GitHub贡献图";
     GithubActivityView mView;
 
     @Override
