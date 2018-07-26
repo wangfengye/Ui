@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--可添加角标的圆形Image-->
+    <declare-styleable name="CircleImageView">
+        <attr name="icon" format="reference"/>
+        <attr name="online" format="boolean"/>
+        <attr name="bg" format="color"/>
+        <attr name="srcType" format="integer"/>
+    </declare-styleable>
+
+</resources>

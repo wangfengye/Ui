@@ -7,7 +7,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.maple.ui.GithubView.GithubViewActivity;
+import com.maple.ui.circleImage.CircleImageActivity;
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
+import com.maple.ui.timeSelector.TimeSelectorActivity;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,9 @@ public class MainListActivity extends AppCompatActivity {
     public ArrayList<ActivityItem> getItems() {
         mItems = new ArrayList<>();
         mItems.add(new ActivityItem(SizeAdapterActivity.class));
+        mItems.add(new ActivityItem(GithubViewActivity.class));
+        mItems.add(new ActivityItem(CircleImageActivity.class));
+        mItems.add(new ActivityItem(TimeSelectorActivity.class));
         return mItems;
 
     }

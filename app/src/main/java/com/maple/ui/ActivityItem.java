@@ -14,6 +14,7 @@ public class ActivityItem {
     public ActivityItem(Class activity) {
         this.activity = activity;
         try {
+            // 反射
             Field field = activity.getField("TITLE");
             title = (String) field.get(activity);
         } catch (NoSuchFieldException e) {
