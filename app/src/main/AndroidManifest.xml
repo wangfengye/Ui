@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".timeSelector.TimeSelectorActivity">
         </activity>
+        <activity android:name=".overlapping.OverlappingActivity">
+        </activity>
     </application>
 
 </manifest>

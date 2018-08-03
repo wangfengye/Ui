@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.maple.ui.GithubView.GithubViewActivity;
 import com.maple.ui.circleImage.CircleImageActivity;
+import com.maple.ui.overlapping.OverlappingActivity;
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
 import com.maple.ui.timeSelector.TimeSelectorActivity;
 
@@ -42,6 +43,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(GithubViewActivity.class));
         mItems.add(new ActivityItem(CircleImageActivity.class));
         mItems.add(new ActivityItem(TimeSelectorActivity.class));
+        mItems.add(new ActivityItem(OverlappingActivity.class));
         return mItems;
 
     }
