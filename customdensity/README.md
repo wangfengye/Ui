@@ -15,14 +15,14 @@
  implementation 'com.github.wangfengye:Ui:sizeAuto'
  ```
 Application中初始化
-```
+```java
     // 初始化
     CustomDensity.init(720,1080,this);
     // 注册该方法后，所有activity默认使用以宽度适配,未注册该方法时,需手动去取消适配
     registerActivityLifecycleCallbacks(new DensityActivityLifecycleCallbacks());
 ```
 activity中单独使用或该页面使用特殊的适配尺寸
-```
+```java
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 必须在设置布局前调用
@@ -31,7 +31,7 @@ activity中单独使用或该页面使用特殊的适配尺寸
     }
 ```
 activity单独使用时,需手动取消适配
-```
+```java
     @Override
     protected void onPause() {
         super.onPause();
