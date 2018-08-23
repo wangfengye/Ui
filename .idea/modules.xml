@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ui.iml" filepath="$PROJECT_DIR$/Ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customdensity/customdensity.iml" filepath="$PROJECT_DIR$/customdensity/customdensity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/markview/markview.iml" filepath="$PROJECT_DIR$/markview/markview.iml" />
     </modules>
   </component>
 </project>
