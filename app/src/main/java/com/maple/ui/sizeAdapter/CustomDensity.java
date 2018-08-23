@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.util.TreeMap;
 
 /**
  * Created by fengye on 2018/6/20.
@@ -17,14 +19,60 @@ import java.lang.reflect.Field;
  */
 
 public class CustomDensity {
+    private static final String TAG = CustomDensity.class.getSimpleName();
     // 屏幕宽度
-    public static final int SCREEN_WIDTH = 360;
-    public static final int DPI = 160;
+    static int mWidth = 720;
+    static int mHeight = 1080;
+    static final int DPI = 160;
     // 默认密度
     private static float sDefaultDensity;
     // 默认字体放大密度
     private static float sDefaultScaledDensity;
+    private static boolean mIsBaseOnWidth = true;
 
+    /**
+     * 初始化默认分辨率 并保存真实分辨率，用于取消适配
+     *
+     * @param width
+     * @param height
+     */
+    public static void init(int width, int height,Context context) {
+        sDefaultDensity = context.getResources().getDisplayMetrics().density;
+        sDefaultScaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        mWidth = width;
+        mHeight = height;
+    }
+    public static void cancelAuto(Context context){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        metrics.density = sDefaultDensity;
+        metrics.densityDpi = (int) (DPI * sDefaultDensity);
+    }
+    public static void autoBaseOnWidth(Context context) {
+        auto(true, mWidth, context);
+    }
+
+    public static void autoBaseOnHeight(Context context) {
+        auto(false, mHeight, context);
+    }
+
+    public static void auto(boolean isWidth, int length, Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int actLength = 0;
+        if (isWidth) {
+            actLength = context.getResources().getDisplayMetrics().widthPixels;
+        } else {
+            actLength = context.getResources().getDisplayMetrics().heightPixels
+                    + getNavigationBarHeight(context);
+        }
+        // 设置密度
+        float density = actLength / length;
+        // 设置dpi
+        int targetDensityDpi = (int) (DPI * density);
+        metrics.density = density;
+        metrics.densityDpi = targetDensityDpi;
+        Log.i("TAG", "auto: " + actLength);
+
+    }
 
     public static void setCustomDensity(Activity activity, final Application application) {
         if (sDefaultDensity == 0) {
@@ -46,7 +94,8 @@ public class CustomDensity {
             });
         }
         int stand = 0;
-        if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        // 橫屏切換時保證獲取整個屏幕的寬度
+      /*  if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // 横屏
             stand = activity.getResources().getDisplayMetrics().widthPixels
                     + getNavigationBarHeight(activity)
@@ -54,15 +103,15 @@ public class CustomDensity {
         } else if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             // 竖屏
             stand = activity.getResources().getDisplayMetrics().widthPixels;
-        }
-
+        }*/
+        stand = activity.getResources().getDisplayMetrics().widthPixels;
         setCustomDensity(activity.getResources().getDisplayMetrics(), stand);
 
     }
 
     private static void setCustomDensity(DisplayMetrics metrics, int stand) {
         // 设置密度
-        float density = stand / SCREEN_WIDTH;
+        float density = stand / mWidth;
         // 设置dpi
         int targetDensityDpi = (int) (DPI * density);
         metrics.density = density;
@@ -70,7 +119,7 @@ public class CustomDensity {
         metrics.densityDpi = targetDensityDpi;
     }
 
-    public static int getNavigationBarHeight(Activity activity) {
+    public static int getNavigationBarHeight(Context activity) {
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         //获取NavigationBar的高度

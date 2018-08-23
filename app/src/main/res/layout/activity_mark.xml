@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MarkActivity">
+
+    <com.maple.wangfeng.markview.MarkView
+        android:id="@+id/mark"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/bjt"
+        android:clickable="true"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/tv_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:text="圓角百分比: "/>
+    <SeekBar
+        android:id="@+id/bar"
+        android:layout_toRightOf="@+id/tv_bar"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:max="100"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

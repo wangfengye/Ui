@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.maple.ui">
+    package="com.maple.ui">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
+        android:name=".MainApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".anim.MainActivity"/>
-        <activity android:name=".GithubView.GithubViewActivity"/>
-        <activity android:name=".ChartActivity"/>
-        <activity android:name=".sizeAdapter.SizeAdapterActivity"/>
+        <activity android:name=".anim.MainActivity" />
+        <activity android:name=".GithubView.GithubViewActivity" />
+        <activity android:name=".ChartActivity" />
+        <activity android:name=".sizeAdapter.SizeAdapterActivity" />
         <activity android:name=".MainListActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".circleImage.CircleImageActivity">
-        </activity>
-        <activity android:name=".timeSelector.TimeSelectorActivity">
-        </activity>
-        <activity android:name=".overlapping.OverlappingActivity">
-        </activity>
+        <activity android:name=".circleImage.CircleImageActivity" />
+        <activity android:name=".timeSelector.TimeSelectorActivity" />
+        <activity android:name=".overlapping.OverlappingActivity" />
+        <activity android:name=".MarkActivity" />
+
+        <meta-data
+            android:name="w"
+            android:value="12" />
+
+        <activity android:name=".sizeAdapter.Size2Activity"></activity>
     </application>
 
 </manifest>
