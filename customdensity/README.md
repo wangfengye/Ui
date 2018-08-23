@@ -9,7 +9,11 @@
 
 ### 使用
 * 初始化
- 
+
+下载依赖
+```
+ implementation 'com.github.wangfengye:Ui:sizeAuto'
+ ```
 Application中初始化
 ```
     // 初始化
