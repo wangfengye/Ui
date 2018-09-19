@@ -33,7 +33,7 @@
             android:name="w"
             android:value="12" />
 
-        <activity android:name=".sizeAdapter.Size2Activity"></activity>
+        <activity android:name=".sizeAdapter.Size2Activity"/>
     </application>
 
 </manifest>

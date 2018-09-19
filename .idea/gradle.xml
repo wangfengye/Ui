@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/blackutil" />
             <option value="$PROJECT_DIR$/customdensity" />
             <option value="$PROJECT_DIR$/markview" />
           </set>
