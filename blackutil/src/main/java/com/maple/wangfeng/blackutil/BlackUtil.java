@@ -13,6 +13,5 @@ public class BlackUtil {
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "激活可以防止随意卸载应用");
         context.startActivity(intent);
-
     }
 }

@@ -12,14 +12,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.maple.ui.GithubView.GithubViewActivity;
-import com.maple.ui.anim.MainActivity;
+
 import com.maple.ui.circleImage.CircleImageActivity;
 import com.maple.ui.overlapping.OverlappingActivity;
-import com.maple.ui.sizeAdapter.CustomDensity;
+
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
 import com.maple.ui.timeSelector.TimeSelectorActivity;
 import com.maple.wangfeng.blackutil.BlackUtil;
-import com.maple.wangfeng.markview.MarkView;
 
 import java.util.ArrayList;
 
@@ -34,12 +33,7 @@ public class MainListActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.list);
         mItems = getItems();
         mAdapter = new ActivityAdapter(mItems);
-        mAdapter.setListener(new OnClickListener<ActivityItem>() {
-            @Override
-            public void onClick(ActivityItem item) {
-                startActivity(new Intent(MainListActivity.this, item.activity));
-            }
-        });
+        mAdapter.setListener(item -> startActivity(new Intent(MainListActivity.this, item.activity)));
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(mAdapter);
         rv.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
