@@ -1,5 +1,4 @@
 #!/bin/sh
-# 更改历史log的author
 
 git filter-branch --env-filter '
 
@@ -8,12 +7,12 @@ am="$GIT_AUTHOR_EMAIL"
 cn="$GIT_COMMITTER_NAME"
 cm="$GIT_COMMITTER_EMAIL"
 
-if [ "$GIT_COMMITTER_EMAIL" = "wf@ascend-tech.com.cn>" ]
+if [ "$GIT_COMMITTER_EMAIL" = "wf@ascend-tech.com.cn" ]
 then
     cn="wangfengye"
     cm="104044135@qq.com"
 fi
-if [ "$GIT_AUTHOR_EMAIL" = "wf@ascend-tech.com.cn>" ]
+if [ "$GIT_AUTHOR_EMAIL" = "wf@ascend-tech.com.cn" ]
 then
     an="wangfengye"
     am="104044135@qq.com"
