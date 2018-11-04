@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import com.maple.ui.GithubView.GithubViewActivity;
 
 import com.maple.ui.circleImage.CircleImageActivity;
+import com.maple.ui.common.CommonActivity;
 import com.maple.ui.overlapping.OverlappingActivity;
 
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
@@ -44,8 +45,7 @@ public class MainListActivity extends AppCompatActivity {
                 .setContentText("ss")
                 .setProgress(100,33,false);
         manager.notify(1,builder.build());
-        //测试防卸载
-        BlackUtil.activation(this);
+
     }
 
     public ArrayList<ActivityItem> getItems() {
@@ -56,6 +56,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(TimeSelectorActivity.class));
         mItems.add(new ActivityItem(OverlappingActivity.class));
         mItems.add(new ActivityItem(MarkActivity.class));
+        mItems.add(new ActivityItem(CommonActivity.class));
         return mItems;
 
     }

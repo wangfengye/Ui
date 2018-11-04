@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Ui.iml" filepath="$PROJECT_DIR$/Ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/blackutil/blackutil.iml" filepath="$PROJECT_DIR$/blackutil/blackutil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/customdensity/customdensity.iml" filepath="$PROJECT_DIR$/customdensity/customdensity.iml" />
       <module fileurl="file://$PROJECT_DIR$/markview/markview.iml" filepath="$PROJECT_DIR$/markview/markview.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobtest/mobtest.iml" filepath="$PROJECT_DIR$/mobtest/mobtest.iml" />
