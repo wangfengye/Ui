@@ -1,1 +1,1 @@
-include ':app', ':markview', ':customdensity', ':blackutil'
+include ':app', ':markview', ':customdensity', ':blackutil', ':mobtest'

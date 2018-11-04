@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/blackutil" />
             <option value="$PROJECT_DIR$/customdensity" />
             <option value="$PROJECT_DIR$/markview" />
+            <option value="$PROJECT_DIR$/mobtest" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
