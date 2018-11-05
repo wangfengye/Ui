@@ -12,4 +12,4 @@
         android:drawableLeft="@android:drawable/star_big_on"
         android:drawableRight="@android:drawable/ic_delete" />
 ```
-![](./screenshot/delEdittext.gif)
+<img src="./screenshot/delEdittext.gif" width="240"/>
