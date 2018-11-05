@@ -2,6 +2,7 @@ package com.maple.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
@@ -33,6 +34,10 @@ public class DelEditText extends AppCompatEditText implements View.OnFocusChange
 
     public DelEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.DelEditText, defStyleAttr, 0);
+        if (ta.hasValue(R.styleable.DelEditText_anim)) {
+            mShowShake = ta.getBoolean(R.styleable.DelEditText_anim,false);
+        }
         init();
     }
 

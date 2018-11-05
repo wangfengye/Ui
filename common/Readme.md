@@ -1,4 +1,15 @@
 ## 常用的自定義UI控件
 
 1. 帶刪除功能的EditText
-    > 特性: 使用`drawableRight`配置刪除圖標,圖標根据内容自动隐藏;使用`enableAnim`设置是否开启删除动画
+    
+```
+    <!--anim:是否开启清除动画-->
+    <!--drawableRight: 删除图标,必填-->
+    <com.maple.common.DelEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:anim="true" //
+        android:drawableLeft="@android:drawable/star_big_on"
+        android:drawableRight="@android:drawable/ic_delete" />
+```
+![](./screenshot/delEditText.webm)
