@@ -7,13 +7,16 @@
     tools:context=".common.CommonActivity">
     <!--anim:是否开启清除动画-->
     <!--drawableRight: 删除图标,必填-->
-    <com.maple.common.DelEditText
+    <!--<com.maple.common.DelEditText
         android:id="@+id/ed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:drawableLeft="@android:drawable/star_big_on"
         android:drawableRight="@android:drawable/ic_delete"
-        app:anim="true" />
-
+        app:anim="true" />-->
+    <com.maple.common.particle.ParticleTextView
+        android:layout_centerInParent="true"
+        android:layout_width="500dp"
+        android:layout_height="500dp" />
 </RelativeLayout>
