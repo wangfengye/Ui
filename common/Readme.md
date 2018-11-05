@@ -8,7 +8,7 @@
     <com.maple.common.DelEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:anim="true" //
+        app:anim="true" 
         android:drawableLeft="@android:drawable/star_big_on"
         android:drawableRight="@android:drawable/ic_delete" />
 ```
