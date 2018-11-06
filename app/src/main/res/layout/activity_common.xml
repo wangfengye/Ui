@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".common.CommonActivity">
-    <!--anim:是否开启清除动画-->
-    <!--drawableRight: 删除图标,必填-->
-    <!--<com.maple.common.DelEditText
-        android:id="@+id/ed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:drawableLeft="@android:drawable/star_big_on"
-        android:drawableRight="@android:drawable/ic_delete"
-        app:anim="true" />-->
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".common.CommonActivity">
     <com.maple.common.particle.ParticleTextView
-        android:layout_centerInParent="true"
-        android:layout_width="500dp"
-        android:layout_height="500dp" />
+            android:id="@+id/ptv"
+            android:layout_centerHorizontal="true"
+            android:layout_width="400dp"
+            android:layout_height="400dp"/>
+    <EditText
+            android:layout_below="@+id/ptv"
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSend"/>
 </RelativeLayout>

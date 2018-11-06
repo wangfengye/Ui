@@ -13,3 +13,17 @@
         android:drawableRight="@android:drawable/ic_delete" />
 ```
 <img src="./screenshot/delEdittext.gif" width="240"/>
+<img src="./screenshot/particle.gif" width="240"/>
+
+2. 粒子化文字
+    > `setText()` 设置初始文字><br/>
+     ` setNextString()` 设置要变化的文字(连续调用改方法,会逐步变化至目标) <br/>
+     `setTextSize()` 设置文字大小(单位d: p)
+    
+```
+    <com.maple.common.particle.ParticleTextView
+            android:id="@+id/ptv"
+            android:layout_centerHorizontal="true"
+            android:layout_width="400dp"
+            android:layout_height="400dp"/>
+```

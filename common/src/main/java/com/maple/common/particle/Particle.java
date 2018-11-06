@@ -7,11 +7,13 @@ import java.security.Policy;
 
 public class Particle {
     private float radius;
-    private double x;
-    private double y;
+    public float x;
+    public float y;
+    public float z;
+    private int color;
 
-    public Particle(float radius, double x, double y) {
-        this.radius = radius;
+    public Particle(float x, float y) {
+        this.radius = 4;
         this.x = x;
         this.y = y;
     }
@@ -24,19 +26,11 @@ public class Particle {
         this.radius = radius;
     }
 
-    public double getX() {
-        return x;
+    public int getColor() {
+        return color;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
+    public void setColor(int color) {
+        this.color = color;
     }
 }

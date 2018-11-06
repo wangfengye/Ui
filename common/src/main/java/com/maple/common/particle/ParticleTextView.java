@@ -1,11 +1,7 @@
 package com.maple.common.particle;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PointF;
+import android.graphics.*;
 import android.icu.util.Measure;
 import android.os.Build;
 import android.os.Handler;
@@ -13,20 +9,25 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * 粒子化文字
  */
 public class ParticleTextView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
-    private String mText ="abcd";
-    private int color;
+    private String mText;//当前文字
+    private LinkedList<String> mNextStrs;//之后的文字
     private Paint textPaint;
-    private ParticleRun run;
     private SurfaceHolder mHolder;
     private boolean mRunning;
+    private ParticleRunList mParticleRunList;
+    private int mTextSize = 1 << 8;
 
     public ParticleTextView(Context context) {
         this(context, null);
@@ -49,6 +50,15 @@ public class ParticleTextView extends SurfaceView implements SurfaceHolder.Callb
         this.mText = mText;
     }
 
+    public void setNextString(String str) {
+        this.mNextStrs.offer(str);
+    }
+
+    public void setTextSizeDp(int size) {
+        final float scale = getResources().getDisplayMetrics().density;
+        this.mTextSize = (int) (size * scale + 0.5f);
+    }
+
     private void init() {
         mHolder = getHolder();
         mHolder.addCallback(this);
@@ -57,20 +67,18 @@ public class ParticleTextView extends SurfaceView implements SurfaceHolder.Callb
         textPaint.setAntiAlias(false);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        run = new ParticleRun(new PointF(0, 0));
-        run.setEndPosition(1000, 1000, 0);
-
-    }
-
-    private void setParticles(Canvas canvas) {
-        int centerX = getWidth() / 2;
-        int centerY = getHeight() / 2;
-        canvas.drawText(mText, centerX, centerY, textPaint);
+        mNextStrs = new LinkedList<>();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         mRunning = true;
+        mParticleRunList = new ParticleRunList();
+        ArrayList<Particle> points = getDataFromImg(getTextBitmap(mText));
+        mParticleRunList.setParticles(points);
+        if (!mNextStrs.isEmpty()) {
+            mParticleRunList.setEndState(getDataFromImg(getTextBitmap(mNextStrs.poll())));
+        }
         new Thread(this).start();
     }
 
@@ -97,14 +105,20 @@ public class ParticleTextView extends SurfaceView implements SurfaceHolder.Callb
     }
 
     private void draw() {
+        ArrayList<Particle> points = mParticleRunList.go();
+        Log.i("TAA", "draw: " + mParticleRunList.isFinished());
+        if (mParticleRunList.isFinished() && !mNextStrs.isEmpty()) {
+
+            mParticleRunList.setEndState(getDataFromImg(getTextBitmap(mNextStrs.poll())));
+        }
         Canvas canvas = mHolder.lockCanvas();
-        PointF f = run.getAxis2D();
-        if (canvas != null && f != null) {
+        if (canvas != null) {
             try {
                 // 重绘背景
                 canvas.drawRGB(255, 255, 255);
-                textPaint.setTextSize(getWidth()/2);
-                canvas.drawText(mText,200,200,textPaint);
+                for (int i = 0; i < points.size(); i++) {
+                    canvas.drawCircle(points.get(i).x, points.get(i).y, 3, textPaint);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -112,6 +126,40 @@ public class ParticleTextView extends SurfaceView implements SurfaceHolder.Callb
             }
 
         }
+    }
 
+    private Bitmap getTextBitmap(String text) {
+        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        textPaint.setTextSize(mTextSize);
+        canvas.drawText(text, getWidth() / 2, getHeight() / 2, textPaint);
+        return bitmap;
+    }
+
+    /**
+     * 获取像素数组,并转化为点阵
+     *
+     * @param bitmap bitmap
+     * @return point集合
+     */
+    private ArrayList<Particle> getDataFromImg(Bitmap bitmap) {
+        ArrayList<Particle> points = new ArrayList<>();
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int[] pixels = new int[width * height];
+        // 获取像素
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        // 转化
+        for (int i = 0; i < width * height; i++) {
+            if (pixels[i] != 0) {
+                points.add(new Particle((i % width), (i / width)));
+            }
+        }
+        ArrayList<Particle> points1 = new ArrayList<>();
+        for (int i = 0; i < mTextSize << 2; i++) {
+            int index = (int) (Math.random() * points.size());
+            points1.add(points.get(index));
+        }
+        return points1;
     }
 }

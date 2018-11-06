@@ -11,10 +11,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.maple.common.DelEditText;
 import com.maple.ui.GithubView.GithubViewActivity;
 
 import com.maple.ui.circleImage.CircleImageActivity;
 import com.maple.ui.common.CommonActivity;
+import com.maple.ui.common.DelEditTextActivity;
 import com.maple.ui.overlapping.OverlappingActivity;
 
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
@@ -57,6 +59,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(OverlappingActivity.class));
         mItems.add(new ActivityItem(MarkActivity.class));
         mItems.add(new ActivityItem(CommonActivity.class));
+        mItems.add(new ActivityItem(DelEditTextActivity.class));
         return mItems;
 
     }
