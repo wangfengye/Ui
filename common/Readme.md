@@ -12,8 +12,10 @@
         android:drawableLeft="@android:drawable/star_big_on"
         android:drawableRight="@android:drawable/ic_delete" />
 ```
-<img src="./screenshot/delEdittext.gif" width="240"  style="display:inline;"/>
-<img src="./screenshot/particle.gif" width="240"  style="display:inline;"/>
+
+| DelEditText | ParticleText | 
+| :--: | :--: |
+| ![8801534.jpg](./screenshot/delEdittext.gif)  | ![蒲公英科学绘本](./screenshot/particle.gif)|
 
 2. 粒子化文字
     > `setText()` 设置初始文字><br/>
