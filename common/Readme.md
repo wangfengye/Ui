@@ -14,8 +14,8 @@
 ```
 
 | DelEditText | ParticleText | 3dTagCloudAndroid|
-| :--: | :--: |
-| ![8801534.jpg](./screenshot/delEdittext.gif)  | ![aa](./screenshot/particle.gif)|![](./screenshot/3d.gif)
+| :--: | :--: | :--: |
+| ![](./screenshot/delEdittext.gif)  | ![](./screenshot/particle.gif)|![](./screenshot/3d.gif)
 
 2. 粒子化文字
     > `setText()` 设置初始文字><br/>
@@ -29,4 +29,4 @@
             android:layout_width="400dp"
             android:layout_height="400dp"/>
 ```
-3. [一个可拖动的3d标签云](https://github.com/wangfengye/3dTagCloudAndroid),[原作地址,貌似许久不维护了,我在基础上对拖到效果做了些优化](https://github.com/misakuo/3dTagCloudAndroid)
+3. [一个可拖动的3d标签云](https://github.com/wangfengye/3dTagCloudAndroid),在misakuo/3dTagCloudAndroid的基础上对拖动效果做了优化,貌似原作者许久不维护了,提了pr没反应.[原作地址](https://github.com/misakuo/3dTagCloudAndroid)
