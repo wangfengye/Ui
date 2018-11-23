@@ -38,6 +38,10 @@
         <activity android:name=".common.CommonActivity"/>
         <activity android:name=".common.DelEditTextActivity">
         </activity>
+        <activity android:name=".common.StarrySkyActivity">
+        </activity>
+        <activity android:name=".common.BezierActivity">
+        </activity>
     </application>
 
 </manifest>

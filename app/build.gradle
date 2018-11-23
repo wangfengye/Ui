@@ -36,4 +36,6 @@ dependencies {
     implementation project(':markview')
     implementation project(':blackutil')
     api project(':common')
+    compile project(path: ':customdensity')
+    compile 'com.moxun:tagcloudlib:1.2.0'
 }

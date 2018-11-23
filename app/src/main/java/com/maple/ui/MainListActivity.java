@@ -15,8 +15,10 @@ import com.maple.common.DelEditText;
 import com.maple.ui.GithubView.GithubViewActivity;
 
 import com.maple.ui.circleImage.CircleImageActivity;
+import com.maple.ui.common.BezierActivity;
 import com.maple.ui.common.CommonActivity;
 import com.maple.ui.common.DelEditTextActivity;
+import com.maple.ui.common.StarrySkyActivity;
 import com.maple.ui.overlapping.OverlappingActivity;
 
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
@@ -60,6 +62,8 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(MarkActivity.class));
         mItems.add(new ActivityItem(CommonActivity.class));
         mItems.add(new ActivityItem(DelEditTextActivity.class));
+        mItems.add(new ActivityItem(StarrySkyActivity.class));
+        mItems.add(new ActivityItem(BezierActivity.class));
         return mItems;
 
     }
