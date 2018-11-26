@@ -18,16 +18,19 @@ import java.lang.reflect.Field;
  */
 
 public class CustomDensity {
+
+    public static final int WIDTH = 0x1;
+    public static final int HEIGHT = 0x2;
+
     private static final String TAG = CustomDensity.class.getSimpleName();
     // 屏幕宽度
-    static int mWidth = 720;
-    static int mHeight = 1080;
-    static final int DPI = 160;
+    private static int mWidth = 720;
+    private static int mHeight = 1080;
+    private static final int DPI = 160;
     // 默认密度
     private static float sDefaultDensity;
     // 默认字体放大密度
     private static float sDefaultScaledDensity;
-    private static boolean mIsBaseOnWidth = true;
 
     /**
      * 初始化默认分辨率 并保存真实分辨率，用于取消适配
@@ -60,31 +63,44 @@ public class CustomDensity {
      * @param context
      */
     public static void autoBaseOnWidth(Context context) {
-        auto(true, mWidth, context);
+        auto(WIDTH, mWidth, context);
     }
+
     /**
      * 以默认高度适配
      *
      * @param context
      */
     public static void autoBaseOnHeight(Context context) {
-        auto(false, mHeight, context);
+        auto(WIDTH, mHeight, context);
     }
 
     /**
      * 适配
-     * @param isWidth true 根据宽度适配,false 根据高度适配
-     * @param length 设计稿的宽或高
+     *
+     * @param length  设计稿的宽或高
      * @param context
      */
-    public static void auto(boolean isWidth, int length, Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+    public static void auto(@AutoMode int direction, float length, Context context) {
+        DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
+        DisplayMetrics activityMetrics = context.getResources().getDisplayMetrics();
+        auto(direction, length, context, metrics, activityMetrics);
+        metrics = getMetricsOnMiui(context.getApplicationContext().getResources());
+        activityMetrics = getMetricsOnMiui(context.getResources());
+        if (metrics != null && activityMetrics != null) {
+            auto(direction, length, context, metrics, activityMetrics);
+        }
+
+    }
+
+    private static void auto(@AutoMode int direction, float length, Context context, DisplayMetrics metrics, DisplayMetrics activityMetrics) {
+        boolean isWidth = direction == WIDTH;
         int actLength = 0;
         if (isWidth) {
             actLength = context.getResources().getDisplayMetrics().widthPixels;
         } else {
             actLength = context.getResources().getDisplayMetrics().heightPixels
-                    + getNavigationBarHeight(context);
+                    - getStatusBarHeight(context);
         }
         // 设置密度
         float density = actLength / length;
@@ -92,9 +108,11 @@ public class CustomDensity {
         int targetDensityDpi = (int) (DPI * density);
         metrics.density = density;
         metrics.densityDpi = targetDensityDpi;
+        activityMetrics.density = density;
+        activityMetrics.densityDpi = targetDensityDpi;
         Log.i("TAG", "auto: " + actLength);
-
     }
+
     @Deprecated
     public static void setCustomDensity(Activity activity, final Application application) {
         if (sDefaultDensity == 0) {
@@ -166,5 +184,24 @@ public class CustomDensity {
         return statusBarHeight;
     }
 
+    /**
+     * 解决 MIUI 更改框架导致的 MIUI7 + Android5.1.1 上出现的失效问题 (以及极少数基于这部分 MIUI 去掉 ART 然后置入 XPosed 的手机)
+     * 来源于: https://github.com/Firedamp/Rudeness/blob/master/rudeness-sdk/src/main/java/com/bulong/rudeness/RudenessScreenHelper.java#L61:5
+     *
+     * @param resources {@link Resources}
+     * @return {@link DisplayMetrics}, 可能为 {@code null}
+     */
+    private static DisplayMetrics getMetricsOnMiui(Resources resources) {
+        if ("MiuiResources".equals(resources.getClass().getSimpleName()) || "XResources".equals(resources.getClass().getSimpleName())) {
+            try {
+                Field field = Resources.class.getDeclaredField("mTmpMetrics");
+                field.setAccessible(true);
+                return (DisplayMetrics) field.get(resources);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
 
 }

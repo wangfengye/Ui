@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.maple.ui"
         minSdkVersion 21
-        targetSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -36,6 +36,6 @@ dependencies {
     implementation project(':markview')
     implementation project(':blackutil')
     api project(':common')
-    compile project(path: ':customdensity')
-    compile 'com.moxun:tagcloudlib:1.2.0'
+    api project(path: ':customdensity')
+    implementation 'com.moxun:tagcloudlib:1.2.0'
 }

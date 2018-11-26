@@ -26,7 +26,7 @@ activity中单独使用或该页面使用特殊的适配尺寸
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 必须在设置布局前调用
-        CustomDensity.auto(true,1200,this);
+         CustomDensity.auto(CustomDensity.WIDTH,720,this);
         setContentView(R.layout.activity_size_adapter);
     }
 ```
@@ -38,4 +38,6 @@ activity单独使用时,需手动取消适配
         CustomDensity.cancelAuto(this);
     }
 ```
+
+* [发现一个更完善的适配库](https://github.com/JessYanCoding/AndroidAutoSize)
 

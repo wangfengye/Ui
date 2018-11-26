@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.maple.ui.sizeAdapter.SizeAdapterActivity">
-    <RelativeLayout
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
 
-        <TextView
+        tools:context="com.maple.ui.sizeAdapter.SizeAdapterActivity">
+    <TextView
+            android:layout_alignParentStart="true"
             android:id="@+id/tv_ui"
             android:layout_width="360dp"
             android:layout_height="360dp"
-            android:background="@color/colorAccent"
-            android:text="UI适配"
+            android:background="#77409EFF"
+            android:text="180*180"
+            android:gravity="center"
             android:textColor="@android:color/white"/>
-    </RelativeLayout>
-</ScrollView>
+    <TextView
+
+
+            android:layout_alignParentBottom="true"
+            android:layout_width="360dp"
+            android:layout_height="360dp"
+            android:background="#7700ff00"
+            android:text="180*180"
+            android:gravity="center"
+            android:textColor="@android:color/white"/>
+    <TextView android:layout_width="720dp" android:layout_height="720dp"
+              android:background="#77015843"
+              android:textColor="@android:color/white"
+              android:gravity="center"
+              android:text="360*360"/>
+</RelativeLayout>
