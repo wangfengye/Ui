@@ -1,31 +1,24 @@
-package com.maple.ui.circleImage;
+package com.maple.common.circle;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import com.maple.common.R;
 
-import com.maple.ui.R;
-
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created by fengye on 2018/4/23.
@@ -34,12 +27,6 @@ import java.util.Map;
 
 public class CircleImageView extends android.support.v7.widget.AppCompatImageView {
     public static final String TAG = CircleImageView.class.getSimpleName();
-    private static final int DEFAULT_COLOR_BG = Color.parseColor("#9a9a9a");
-    // 为避免出现小数,比例采用倒数
-    private static final int RADIUS_ICON = 3;// 小图标半径比例的倒数
-    private static final int RADIUS_POINT = 5;//点半径比例的倒数
-    private static final int BLANK = 20; //空白距离比例
-
     // 四角位置
     public static final int LEFT_TOP = 0;
     public static final int RIGHT_TOP = 1;
@@ -48,17 +35,31 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 
     public static final int TYPE_NORMAL = 0;//有背景,有色图;
     public static final int TYPE_PURE = 1;//有背景,纯色图;默认白色
+    public static final int TYPE_NO_COLOR = 2;//有背景,无色图
+
+    private static final int DEFAULT_COLOR_BG = Color.parseColor("#9a9a9a");
+    // 为避免出现小数,比例采用倒数
+    private static final int RADIUS_ICON = 3;// 小图标半径比例的倒数
+    private static final int RADIUS_POINT = 5;//点半径比例的倒数
+    private static final int BLANK = 20; //空白距离比例
+    private float mBorderWidth = 4.0f;
+
+
+    @IntDef({TYPE_NORMAL, TYPE_PURE, TYPE_NO_COLOR})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface ImgType {
+
+    }
+
     // 图片过滤色;决定通过过滤矩阵后剩余的颜色
     private int mImgColor = Color.parseColor("#ffffff");
+
     //背景颜色
     private int mBg = DEFAULT_COLOR_BG;
     private int mRadius;
     private int mRadiusIcon;
     private int mRadiusPoint;
     private int mBlank;
-    private Drawable mIcon;//图标
-    private boolean mShowOnline;//是否绘制点
-    private boolean mOnline;//是否在线
     private int mSrcType = 0;// 主图片绘制类型
     private int mWidth;
     private int mHeight;
@@ -66,11 +67,19 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 
     private Paint mBgPaint;//背景色
     private Paint mBlankPaint;//绘制空白
-
+    private Paint mBorderPaint;//边框画笔
 
     private Paint mCornerPaint;//绘制点;
     private Paint mCornerBgPaint;//绘制空白
-    private HashMap<Integer, Corner> mCornerMap = new HashMap<>();
+    private HashMap<Integer, Corner> mCornerMap = new HashMap<>(4);
+    private int mBorderColor = Color.parseColor("#00bcd4");
+    private boolean mDrawBorder = false;
+    private boolean mDrawTriangle = false;
+
+    //绘制顶部三角
+    public void setDrawTriangle(boolean mDrawTriangle) {
+        this.mDrawTriangle = mDrawTriangle;
+    }
 
     public CircleImageView(Context context) {
         super(context);
@@ -84,12 +93,20 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0);
 
-
         if (ta.hasValue(R.styleable.CircleImageView_bg)) {
             mBg = ta.getColor(R.styleable.CircleImageView_bg, 0);
         }
         if (ta.hasValue(R.styleable.CircleImageView_srcType)) {
             mSrcType = ta.getInt(R.styleable.CircleImageView_srcType, 0);
+        }
+        if (ta.hasValue(R.styleable.CircleImageView_drawBorder)) {
+            mDrawBorder = ta.getBoolean(R.styleable.CircleImageView_drawBorder, false);
+        }
+        if (ta.hasValue(R.styleable.CircleImageView_border_color)) {
+            mBorderColor = ta.getColor(R.styleable.CircleImageView_border_color, Color.WHITE);
+        }
+        if (ta.hasValue(R.styleable.CircleImageView_borderStokeWidth)){
+            mBorderWidth = ta.getFloat(R.styleable.CircleImageView_borderStokeWidth,4.0f);
         }
         // 不再使用typedArray,释放资源,以便系统复用;
         ta.recycle();
@@ -106,14 +123,33 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         setImage(ContextCompat.getDrawable(getContext(), id));
     }
 
+    public void drawBorder(boolean drawBorder) {
+        this.mDrawBorder = drawBorder;
+    }
 
     public void setBg(int color) {
         this.mBg = color;
         postInvalidate();
     }
 
+    public void setBorderColor(int color) {
+        this.mBorderColor = color;
+        postInvalidate();
+    }
+
+    public float getBorderWidth() {
+        return mBorderWidth;
+    }
+
+    public void setBorderWidth(float borderWidth) {
+        this.mBorderWidth = borderWidth;
+        mBorderPaint.setStrokeWidth(mBorderWidth);
+        postInvalidate();
+    }
+
     public void setCorner(int location, Corner corner) {
         mCornerMap.put(location, corner);
+        postInvalidate();
     }
 
     /**
@@ -122,7 +158,7 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
      * @param type  模式:原图, 纯色图
      * @param color 纯色图指定的颜色
      */
-    public void setSrcType(int type, int color) {
+    public void setSrcType(@ImgType int type, @ColorInt int color) {
         this.mSrcType = type;
         this.mImgColor = color;
         postInvalidate();
@@ -148,12 +184,16 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         mImgPaint.setAntiAlias(true);
 
         mCornerBgPaint = new Paint();
-        mImgPaint.setAntiAlias(true);
+        mCornerBgPaint.setAntiAlias(true);
 
         mBgPaint = new Paint();
         mBgPaint.setAntiAlias(true);
         mBgPaint.setStyle(Paint.Style.FILL);
-        mBgPaint.setColor(mBg);
+
+        mBorderPaint = new Paint();
+        mBorderPaint.setAntiAlias(true);
+        mBorderPaint.setStyle(Paint.Style.STROKE);
+        mBorderPaint.setStrokeWidth(mBorderWidth);
 
         mBlankPaint = new Paint();
         mBlankPaint.setAntiAlias(true);
@@ -168,8 +208,11 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 
     @Override
     protected void onDraw(Canvas canvas) {
+        mBgPaint.setColor(mBg);
+        mBorderPaint.setColor(mBorderColor);
         drawMain(canvas);
         for (Map.Entry<Integer, Corner> entry : mCornerMap.entrySet()) {
+            if (entry.getValue() == null) continue;
             switch (entry.getValue().getType()) {
                 case Corner.ICON:
                     drawIcon(canvas, entry.getKey());
@@ -178,6 +221,7 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
                     drawPoint(canvas, entry.getKey());
             }
         }
+        if (mDrawTriangle) drawTriangle(canvas);
     }
 
     @Override
@@ -200,27 +244,37 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         if (drawable != null) {
             bitmap = drawableToBitmap(drawable);
             // 缩放
+            ColorMatrix cm;
+            ColorMatrixColorFilter f;
             switch (mSrcType) {
                 case TYPE_NORMAL:
-                    drawCircleWithBg(bitmap, canvas);
+                    mImgPaint.setColorFilter(null);
+                    drawCircleWithBg(bitmap, canvas, 2.0f);
                     break;
                 case TYPE_PURE:
-                    // paint 改为纯白色
-                    int red = (mImgColor & 0xff0000) >> 16;
+                    // paint 改为纯色
+                    /*int red = (mImgColor & 0xff0000) >> 16;
                     int green = (mImgColor & 0x00ff00) >> 8;
-                    int blue = (mImgColor & 0x0000ff);
-                    ColorMatrix cm = new ColorMatrix(new float[]{
-                            1, 0, 0, 0, red,
-                            0, 1, 0, 0, green,
-                            0, 0, 1, 0, blue,
+                    int blue = (mImgColor & 0x0000ff);*/
+                    int red = Color.red(mImgColor);
+                    int green = Color.green(mImgColor);
+                    int blue = Color.blue(mImgColor);
+                    cm = new ColorMatrix(new float[]{
+                            0, 0, 0, 0, red,
+                            0, 0, 0, 0, green,
+                            0, 0, 0, 0, blue,
                             0, 0, 0, 1, 0,
                     });
-                    ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+                    f = new ColorMatrixColorFilter(cm);
                     mImgPaint.setColorFilter(f);
-                    drawCircleWithBg(bitmap, canvas);
+                    drawCircleWithBg(bitmap, canvas, 1.41f);
                     break;
-                default:
-                    drawSquare(bitmap, canvas);
+                case TYPE_NO_COLOR:
+                    cm = new ColorMatrix();
+                    cm.setSaturation(0);
+                    f = new ColorMatrixColorFilter(cm);
+                    mImgPaint.setColorFilter(f);
+                    drawCircleWithBg(bitmap, canvas, 2.0f);
                     break;
             }
             // recycle后其他图片加载异常
@@ -228,8 +282,8 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         }
     }
 
-    private void drawSquare(Bitmap bitmap,Canvas canvas) {
-        float scale = (mRadius * 2 / 4) * 2.0f / Math.min(bitmap.getHeight(), bitmap.getWidth());
+    private void drawSquare(Bitmap bitmap, Canvas canvas) {
+        float scale = mRadius * 1.0f / Math.min(bitmap.getHeight(), bitmap.getWidth());
 
 
         int left = (int) (mWidth / 2 - scale * bitmap.getWidth() / 2);
@@ -240,18 +294,38 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         canvas.drawBitmap(bitmap, null, rect, mImgPaint);
     }
 
-    private void drawCircleWithBg(Bitmap bitmap, Canvas canvas) {
-        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        float scale = (mRadius * 2 / 4) * 2.0f / Math.min(bitmap.getHeight(), bitmap.getWidth());
+    /**
+     * @param bitmap 主图
+     * @param canvas
+     * @param per    绘制的百分比 1.41保证图形真好被包裹,
+     */
+    private void drawCircleWithBg(Bitmap bitmap, Canvas canvas, float per) {
+        // 1.41 是开根号2的值,保证图形不超过外层圆
+        float scale = mRadius * per / Math.min(bitmap.getHeight(), bitmap.getWidth());
 
         // 绘制主圆
+        canvas.drawCircle(mWidth / 2, mHeight / 2, mRadius, mBgPaint);
+        int layerId = canvas.saveLayer(0, 0, canvas.getWidth(), canvas.getHeight(), null, Canvas.ALL_SAVE_FLAG);
         canvas.drawCircle(mWidth / 2, mHeight / 2, mRadius, mBgPaint);
         int left = (int) (mWidth / 2 - scale * bitmap.getWidth() / 2);
         int top = (int) (mHeight / 2 - scale * bitmap.getHeight() / 2);
         int right = (int) (mWidth / 2 + scale * bitmap.getWidth() / 2);
         int bottom = (int) (mHeight / 2 + scale * bitmap.getHeight() / 2);
         Rect rect = new Rect(left, top, right, bottom);
+        mImgPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, null, rect, mImgPaint);
+        canvas.restoreToCount(layerId);
+        mImgPaint.setXfermode(null);
+        //绘制边框
+
+        if (mSrcType!= TYPE_NO_COLOR){
+            LinearGradient lg = new LinearGradient(mWidth / 2, 0, mWidth / 2, mHeight,
+                    Color.parseColor("#00BCD4"), Color.parseColor("#B400CA"),
+                    Shader.TileMode.MIRROR);
+            mBorderPaint.setShader(lg);
+        }
+        if (mDrawBorder) canvas.drawCircle(mWidth / 2, mHeight / 2, mRadius-mBorderWidth/2, mBorderPaint);
+        mBorderPaint.setShader(null);
     }
 
     private void drawFullCircle(Bitmap bitmap, Canvas canvas) {
@@ -324,6 +398,20 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         mCornerBgPaint.setColor(mCornerMap.get(location).getColor());
         canvas.drawCircle(center.x, center.y, mRadiusPoint, mBlankPaint);
         canvas.drawCircle(center.x, center.y, mRadiusPoint - mBlank, mCornerBgPaint);
+    }
+
+    /**
+     * 頂部繪製三角
+     *
+     * @param canvas
+     */
+    private void drawTriangle(Canvas canvas) {
+        Path path = new Path();
+        path.moveTo(mRadius - mRadius / 3, -mRadius / 3);
+        path.lineTo(mRadius + mRadius / 3, -mRadius / 3);
+        path.lineTo(mRadius, 0);
+        path.close();
+        canvas.drawPath(path, mBgPaint);
     }
 
     /**

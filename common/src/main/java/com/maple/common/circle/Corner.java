@@ -1,10 +1,11 @@
-package com.maple.ui.circleImage;
+package com.maple.common.circle;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 /**
@@ -31,19 +32,28 @@ public class Corner {
         mColor = color;
     }
 
-    public static Corner newIcon(Drawable icon,int bg) {
+    public static Corner newIcon(Drawable icon, int bg) {
         Corner corner = new Corner(ICON);
         corner.mIcon = icon;
         corner.mBg = bg;
         return corner;
     }
-    public static Corner newIcon(Context context,@DrawableRes int icon, @ColorRes int bg){
+
+    /**
+     *
+     * @param context
+     * @param icon
+     * @param bg
+     * @return
+     */
+    public static Corner newIcon(@NonNull Context context, @DrawableRes int icon, @ColorRes int bg) {
         Corner corner = new Corner(ICON);
-        corner.mIcon = context.getDrawable(icon);
-        corner.mBg = ContextCompat.getColor(context,bg);
+        corner.mIcon = ContextCompat.getDrawable(context,icon);
+        corner.mBg = ContextCompat.getColor(context, bg);
         return corner;
     }
-    public static Corner newIcon(Drawable icon,int bg,int color) {
+
+    public static Corner newIcon(Drawable icon, int bg, int color) {
         Corner corner = new Corner(ICON);
         corner.mBg = bg;
         corner.mColor = color;

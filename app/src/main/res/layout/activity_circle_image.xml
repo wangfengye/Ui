@@ -1,45 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.maple.ui.circleImage.CircleImageActivity">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.maple.ui.circleImage.CircleImageActivity">
 
-    <com.maple.ui.circleImage.CircleImageView
-        android:id="@+id/cimg_a"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_pad"
-        app:srcType="0"
-        app:icon="@mipmap/ic_pad"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="186dp"/>
-
-    <com.maple.ui.circleImage.CircleImageView
-        android:id="@+id/cimg_b"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="97dp"
-        android:src="@mipmap/ic_pad"
-        app:icon="@mipmap/ic_pad"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcType="2"
-        tools:layout_editor_absoluteY="65dp"/>
-    <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="            东汉末年分三国,"/>
-        <TextView
-            android:background="@color/colorAccent"
-            android:layout_width="40dp"
-            android:gravity="center"
-            android:layout_height="22dp"
-            android:text="三国"/>
-    </RelativeLayout>
-
+    <com.maple.common.circle.CircleImageView
+            android:id="@+id/cimg"
+            android:layout_width="300dp"
+            android:layout_height="300dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
+    android:src="@mipmap/bjt"
+    app:bg="@color/colorAccent"
+    app:drawBorder="true"/>
+    <SeekBar
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/cimg" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+    <Switch
+            android:id="@+id/sw"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="sfs" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/bar"/>
 </android.support.constraint.ConstraintLayout>
