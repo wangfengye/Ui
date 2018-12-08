@@ -42,6 +42,8 @@
         </activity>
         <activity android:name=".common.BezierActivity">
         </activity>
+        <activity android:name=".common.DreamActivity">
+        </activity>
     </application>
 
 </manifest>

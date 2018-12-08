@@ -1,8 +1,6 @@
 package com.maple.ui;
 
 import android.app.NotificationManager;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -10,20 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import com.maple.common.DelEditText;
 import com.maple.ui.GithubView.GithubViewActivity;
-
 import com.maple.ui.circleImage.CircleImageActivity;
-import com.maple.ui.common.BezierActivity;
-import com.maple.ui.common.CommonActivity;
-import com.maple.ui.common.DelEditTextActivity;
-import com.maple.ui.common.StarrySkyActivity;
+import com.maple.ui.common.*;
 import com.maple.ui.overlapping.OverlappingActivity;
-
 import com.maple.ui.sizeAdapter.SizeAdapterActivity;
 import com.maple.ui.timeSelector.TimeSelectorActivity;
-import com.maple.wangfeng.blackutil.BlackUtil;
 
 import java.util.ArrayList;
 
@@ -54,6 +44,7 @@ public class MainListActivity extends AppCompatActivity {
 
     public ArrayList<ActivityItem> getItems() {
         mItems = new ArrayList<>();
+        mItems.add(new ActivityItem(DreamActivity.class));
         mItems.add(new ActivityItem(SizeAdapterActivity.class));
         mItems.add(new ActivityItem(GithubViewActivity.class));
         mItems.add(new ActivityItem(CircleImageActivity.class));
