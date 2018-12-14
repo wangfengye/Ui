@@ -3,7 +3,6 @@ package com.maple.ui;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,13 +32,12 @@ public class MainListActivity extends AppCompatActivity {
         rv.setAdapter(mAdapter);
         rv.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+        /* NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.bjt)
                 .setContentTitle("ssss")
                 .setContentText("ss")
                 .setProgress(100,33,false);
-        manager.notify(1,builder.build());
-
+        manager.notify(1,builder.build());*/
     }
 
     public ArrayList<ActivityItem> getItems() {

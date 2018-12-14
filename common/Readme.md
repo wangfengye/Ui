@@ -32,10 +32,13 @@
 3. [一个可拖动的3d标签云](https://github.com/wangfengye/3dTagCloudAndroid),在misakuo/3dTagCloudAndroid的基础上对拖动
 效果做了优化,貌似原作者许久不维护了,提了pr没反应.[原作地址](https://github.com/misakuo/3dTagCloudAndroid)
 
-| GridComputingView |
-| :--: |
-| ![](./screenshot/brx.gif)  | 
+| GridComputingView |DreamLayout|
+| :--: | :--: |
+| ![](./screenshot/brx.gif)  |  ![](./screenshot/woniu.gif) |
 
 4. 自定义View之贝塞尔曲线.
 > GridComputingView是一个绘图基类,提供网格线,及点位移动功能,继承该View,通过它提供的点位进行贝塞尔曲线绘制,可以
 手动拖动点位来调整View;
+
+5. 自定义星空图,
+> 子控件随机显示在布局中
