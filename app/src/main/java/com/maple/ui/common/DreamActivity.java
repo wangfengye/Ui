@@ -1,66 +1,51 @@
 package com.maple.ui.common;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.TextView;
 import com.maple.common.dreame.DreamLayout;
 import com.maple.ui.R;
 
-public class DreamActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class DreamActivity extends AppCompatActivity implements Runnable {
     public static final String TITLE = "蜗牛梦话圈";
+    public static String[] strs = new String[]{
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544782301297&di=d46fa4680d67f317b2afb55ceaa871d4&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F91ef76c6a7efce1b5ef04082a251f3deb58f659b.jpg"
+            ,"https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=de08a1f093510fb367197197e932c893/b999a9014c086e062550d0020f087bf40bd1cbfb.jpg"
+            ,"https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=91faff9259e736d147138a08ab514ffc/241f95cad1c8a786e0e3fb406a09c93d71cf50b6.jpg"
+            ,"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=bde864ccc6134954611eee64664f92dd/ac6eddc451da81cbdaec5f805f66d01609243171.jpg"};
+    private Handler handler;
+    private DreamAdapter adapter;
+    final int[] index = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dream);
         DreamLayout dreamLayout = findViewById(R.id.dream);
-        View view = LayoutInflater.from(this).inflate(R.layout.item_dream, dreamLayout, false);
-        TextView tv = view.findViewById(R.id.tv);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view = LayoutInflater.from(v.getContext()).inflate(R.layout.item_dream, dreamLayout, false);
+        ArrayList<String> urls = new ArrayList<>();
+        adapter = new DreamAdapter("搜搜", urls);
+        dreamLayout.setAdapter(adapter);
+        handler = new Handler();
 
+        handler.post(this);
 
-                GradientDrawable drawable = new GradientDrawable();
-                drawable.setColor(Color.rgb((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-                drawable.setCornerRadius(1080);
-                view.findViewById(R.id.tv).setBackground(drawable);
-                dreamLayout.addChild(view);
-                anim(view);
-            }
-        });
-        tv.setText("first");
-        dreamLayout.addChild(view);
     }
 
-    private void anim(View view) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-        anim.setDuration(1000);
-        anim.start();
-        ObjectAnimator anim1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
-        anim1.setInterpolator(new AccelerateDecelerateInterpolator());
-        anim1.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                ViewGroup group = (ViewGroup) view.getParent();
-                group.removeView(view);
-            }
-        });
-        anim1.setDuration(3000);
-        AnimatorSet set = new AnimatorSet();
-        set.play(anim1).after(3000).after(anim);
-        set.start();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null) handler.removeCallbacks(this);
+    }
+
+    @Override
+    public void run() {
+        adapter.addChild(strs[index[0] % 4]);
+        index[0]++;
+        if (adapter.getList().size() > 3) {
+            adapter.removeChild(adapter.getList().get(0));
+        }
+        handler.postDelayed(this, 5000);
     }
 }

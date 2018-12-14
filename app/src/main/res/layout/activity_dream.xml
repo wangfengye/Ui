@@ -8,22 +8,9 @@
         tools:context=".common.DreamActivity">
     <com.maple.common.dreame.DreamLayout
             android:id="@+id/dream"
-            android:background="@mipmap/sky_star"
+            android:background="@mipmap/bg_sky"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-        <TextView
-                android:tag="@id/dream_center"
-                android:background="@drawable/bg_round"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="探索"
-                android:clickable="true"
-                android:includeFontPadding="false"
-                android:gravity="center"
-                android:elevation="4dp"
-                android:textColor="#ffffff"/>
-
     </com.maple.common.dreame.DreamLayout>
 
 </RelativeLayout>
