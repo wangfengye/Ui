@@ -1,8 +1,5 @@
 package com.maple.common.dreame;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.*;
 import android.os.Handler;
@@ -10,7 +7,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,6 +27,8 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
     private int mRadiusMax; //整个布局的半径
 
     BaseAdapter mAdapter;
+
+    @SuppressWarnings("all")
     private float mBlankPer = .1f;// 圆之间的最小空隙(百分比值,取圆的直径的百分比)
     ArrayList<Point> mChildrenPoints = new ArrayList<>();
     private float[] data;
@@ -57,22 +55,14 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
 
     public void addChild(View v) {
         addView(v);
-        ObjectAnimator anim = ObjectAnimator.ofFloat(v, "alpha", 0f, 1f);
-        anim.setDuration(1000);
-        anim.start();
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int contentWidth = MeasureSpec.getSize(widthMeasureSpec);
         int contentHeight = MeasureSpec.getSize(heightMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int dimensionX = contentWidth;
-        int dimensionY = contentHeight;
-        setMeasuredDimension(dimensionX, dimensionY);
         int len = Math.min(contentWidth, contentHeight);
         measureChildren(MeasureSpec.makeMeasureSpec(len, MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(len, MeasureSpec.AT_MOST));
     }
@@ -82,14 +72,12 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         if (getChildAt(0) != null && getChildAt(0).getTag().equals(DREAM_CENTER)) {
             removeView(getChildAt(0));
         }
-        int radius = (int) (Math.max(view.getMeasuredWidth(), view.getMeasuredHeight()) * 1.2 / 2);
-
         view.setTag(DREAM_CENTER);
         addView(view, 0);
         Log.i(TAG, "setCenterView: ");
     }
 
-
+    @SuppressWarnings("all")
     public void setAdapter(BaseAdapter baseAdapter) {
         mAdapter = baseAdapter;
         setCenterView(baseAdapter.onCreateCenter(this));
@@ -97,7 +85,6 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         for (int i = 0; i < baseAdapter.getList().size(); i++) {
             View childView = mAdapter.onCreateChild(this, mAdapter.getList().get(i));
             addChild(childView);
-
         }
         mAdapter.registerAdapterDataObserver(this);
     }
@@ -114,19 +101,17 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         for (int i = 1; i < getChildCount(); i++) {
             View view = getChildAt(i);
             int rad = Math.max(view.getMeasuredWidth(), view.getMeasuredHeight()) / 2;
-            // 新增的控件
-
             Point position;
-            if (i > mChildrenPoints.size()) {
+            // 数据只支持末尾插入,可直接通过列表长度判断是否是新增点
+            if (i > mChildrenPoints.size()) {// 新增的控件,设置随机点
                 position = getRandomPoint(rad, mRadiusMax, getMeasuredWidth() / 2, getMeasuredHeight() / 2);
                 mChildrenPoints.add(position);
-            } else {
+            } else {//已存在控件,直接从列表取
                 position = mChildrenPoints.get(i - 1);
             }
             int x = position.x;
             int y = position.y;
             view.layout(x - rad, y - rad, x + rad, y + rad);
-
         }
     }
 
@@ -137,6 +122,7 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         // 初始化一个环形渐变色的画笔
         mLayoutPaint = new Paint();
         mLayoutPaint.setAntiAlias(true);
+        //圆心为画布中心,半径为 mRadiusMax,半径80%处向外渐变为白色
         RadialGradient gradient =
                 new RadialGradient(width / 2, height / 2, mRadiusMax,
                         new int[]{centerColor, centerColor, edgeColor}, new float[]{0f, .8f, 1.0f}, Shader.TileMode.MIRROR);
@@ -157,6 +143,8 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         int width = getMeasuredWidth();
         int height = getMeasuredHeight();
         for (float scale : data) {
+            // scale 描述图片放大比例;
+            // 将画布放大scale 比例后,绘制同样大小的圆,还原画布,即可得放大scale倍的圆
             canvas.save();
             canvas.scale(scale, scale, width / 2, height / 2);
             canvas.drawCircle(width / 2, height / 2, mRadiusMax, mLayoutPaint);
@@ -183,28 +171,34 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
 
     /**
      * 获取随机点,根据父子空间半径判断随机点是否有足够空间可用
+     * 随机点区域为:
      *
-     * @return 返回随机结果
+     * @param rad     子控件半径
+     * @param radMax  父布局半径
+     * @param centerX 父布局中点 x
+     * @param centerY 父布局中点 y
+     * @return 一个可用的随机点位
      */
     private Point getRandomPoint(int rad, int radMax, int centerX, int centerY) {
-        int x = 0;
-        int y = 0;
+        int x;
+        int y;
         int counter = 0;
         boolean conflict;
         Random random = new Random();
         while (counter < 100000) {
             counter++;
-            x = (int) (getMeasuredWidth() / 2 - radMax + rad + random.nextInt( 2 * radMax - 2 * rad));
-            y = (int) (getMeasuredHeight() / 2 - radMax + rad + random.nextInt( 2 * radMax - 2 * rad));
+            x = (getMeasuredWidth() / 2 - radMax + rad + random.nextInt(2 * radMax - 2 * rad));
+            y = (getMeasuredHeight() / 2 - radMax + rad + random.nextInt(2 * radMax - 2 * rad));
             conflict = false;
+            // 判断与其他子控件是否冲突
             for (Point p : mChildrenPoints) {
                 int dis = (int) Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2));
-                if (dis < 2 * rad * (1 + mBlankPer)) {
+                if (dis < 2 * rad * (1 + mBlankPer)) {//子控件大小一致,设置两个子控件中点距离最小为 半径和的(1+mBlankPer)倍
                     conflict = true;
                     break;
                 }
             }
-            if (!conflict) {
+            if (!conflict) {// 判断与中心点冲突
                 int dis = (int) Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
                 if (dis < (rad + mCenterRadius) * ((1 + mBlankPer))) conflict = true;
             }
@@ -216,6 +210,7 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
 
 
     @Override
+    @SuppressWarnings("all")
     public void notifyDataAdded(int i) {
         addChild(mAdapter.onCreateChild(this, mAdapter.getItem(i)));
     }
@@ -225,19 +220,9 @@ public class DreamLayout extends ViewGroup implements Runnable, BaseAdapter.Adap
         removeChild(i);
     }
 
-    private void removeChild(int i) {
+    protected void removeChild(int i) {
         View view = getChildAt(i + 1);
-        ObjectAnimator anim1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
-        anim1.setInterpolator(new AccelerateDecelerateInterpolator());
-        anim1.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                mChildrenPoints.remove(i);
-                removeView(view);
-            }
-        });
-        anim1.setDuration(3000);
-        anim1.start();
+        mChildrenPoints.remove(i);
+        removeView(view);
     }
 }

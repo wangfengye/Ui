@@ -29,7 +29,7 @@ public class DreamAdapter extends BaseAdapter<String, String> {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dream, parent, false);
         TextView tv = v.findViewById(R.id.tv);
         tv.setText(center);
-        v.setOnClickListener(vu -> addChild(DreamActivity.strs[(int)(Math.random()*4)]));
+        v.setOnClickListener(vu -> addChild(DreamActivity.strs[(int) (Math.random() * 4)]));
         return v;
     }
 
@@ -42,9 +42,9 @@ public class DreamAdapter extends BaseAdapter<String, String> {
         drawable.setCornerRadius(1080);
         v.setBackground(drawable);*/
         ImageView img = v.findViewById(R.id.img);
-        RequestOptions options = new RequestOptions();
-        options.placeholder(R.mipmap.heros).diskCacheStrategy(DiskCacheStrategy.ALL)
-        .centerCrop().transform(new CircleCrop());
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.mipmap.heros).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop().transform(new CircleCrop());
         Glide.with(parent.getContext())
                 .asBitmap()
                 .load(s)

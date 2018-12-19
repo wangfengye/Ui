@@ -43,9 +43,19 @@ public abstract class BaseAdapter<T, C> {
         mObserver.notifyDataRemoved(i);
     }
 
-
+    /**
+     *  创建中心View
+     * @param parent 父布局
+     * @return 中心控件的View
+     */
     protected abstract View onCreateCenter(ViewGroup parent);
 
+    /**
+     *  创建普通子View
+     * @param parent 父布局
+     * @param t 传入的数据
+     * @return 创建完成的子View
+     */
     protected abstract View onCreateChild(ViewGroup parent, T t);
 
     void registerAdapterDataObserver(AdapterDataObserver dataObserver) {

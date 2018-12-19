@@ -41,4 +41,6 @@ dependencies {
     implementation 'com.moxun:tagcloudlib:1.2.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //高斯模糊
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
 }
