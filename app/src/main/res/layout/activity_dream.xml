@@ -6,11 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".common.DreamActivity">
-    <com.maple.common.dreame.DreamLayout
+    <com.maple.common.dreame.AnimDreamLayout
             android:id="@+id/dream"
             android:background="@mipmap/bg_sky"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    </com.maple.common.dreame.DreamLayout>
+    </com.maple.common.dreame.AnimDreamLayout>
 
 </RelativeLayout>
