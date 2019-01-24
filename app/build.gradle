@@ -42,5 +42,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //高斯模糊
-    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
 }

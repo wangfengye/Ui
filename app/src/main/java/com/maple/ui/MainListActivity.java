@@ -53,6 +53,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(DelEditTextActivity.class));
         mItems.add(new ActivityItem(StarrySkyActivity.class));
         mItems.add(new ActivityItem(BezierActivity.class));
+        mItems.add(new ActivityItem(HandlerWriteActivity.class));
         return mItems;
 
     }

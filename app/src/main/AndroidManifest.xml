@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".MainApp"
             android:allowBackup="true"
@@ -43,6 +44,8 @@
         <activity android:name=".common.BezierActivity">
         </activity>
         <activity android:name=".common.DreamActivity">
+        </activity>
+        <activity android:name=".common.HandlerWriteActivity">
         </activity>
     </application>
 

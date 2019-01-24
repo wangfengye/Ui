@@ -3,5 +3,4 @@
     <string name="aaa">M141,17 A9,9 0 1,1 142,16 L149,23</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
