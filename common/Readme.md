@@ -15,7 +15,7 @@
 
 | DelEditText | ParticleText | 3dTagCloudAndroid|
 | :--: | :--: | :--: |
-| ![](./screenshot/delEditText.gif)  | ![](./screenshot/particle.gif)|![](./screenshot/3d.gif)
+| ![](./screenshot/delEdittext.gif)  | ![](./screenshot/particle.gif)|![](./screenshot/3d.gif)
 
 2. 粒子化文字
     > `setText()` 设置初始文字><br/>
