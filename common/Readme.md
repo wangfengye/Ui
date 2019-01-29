@@ -43,6 +43,9 @@
 5. 自定义星空图,
 > 子控件随机显示在布局中
 
+6. 横向渐变色文字Span[HorizonColorfulSpan]
+    > 使用 `HorizonColorfulSpan.getColorFulWithCenterEdge(text,colorStart,colorEnd,centerCount)`</br>
+    缺陷: 中点依据字符数量确认,不同类型字符宽度不同导致中点偏移
 ### 第三方控件
 1. [手写面板](https://github.com/gcacace/android-signaturepad)本来自己写的,发现个更好用的哭
 > 特性: 三次贝塞尔曲线实现笔画圆滑;根据笔画速度控制笔画宽度
