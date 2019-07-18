@@ -15,6 +15,8 @@
             android:supportsRtl="true"
             android:testOnly="false"
             android:theme="@style/AppTheme">
+        <activity android:name=".common.WaterActivity">
+        </activity>
         <activity android:name=".anim.MainActivity"/>
         <activity android:name=".GithubView.GithubViewActivity"/>
         <activity android:name=".ChartActivity"/>
