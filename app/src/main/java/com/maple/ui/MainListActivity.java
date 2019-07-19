@@ -54,6 +54,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(BezierActivity.class));
         mItems.add(new ActivityItem(HandlerWriteActivity.class));
         mItems.add(new ActivityItem(WaterActivity.class));
+        mItems.add(new ActivityItem(ExplosionActivity.class));
         return mItems;
     }
 }
