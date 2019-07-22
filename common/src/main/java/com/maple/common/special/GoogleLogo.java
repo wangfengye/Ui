@@ -168,6 +168,10 @@ public class GoogleLogo extends View {
     }
 
     private void judgeByColor(Bitmap bitmap, int x, int y) {
+        if (x<0||y<0||bitmap==null){
+            Log.i(TAG, "judgeByColor: 入参异常");
+            return;
+        }
         int color = bitmap.getPixel(x * bitmap.getWidth() / mWidth, y * bitmap.getHeight() / mHeight);
         switch (color) {
             case BLUE:
