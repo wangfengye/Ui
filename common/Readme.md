@@ -60,3 +60,10 @@
 * `ParticleFactory`: 抽象粒子构造器
 * `ExplosionField`: 承载动画的控件,也是外部调用时的接口提供者.
 * `ExplosionAnimator ` 动画播放器,`draw()`控制全部粒子的位置改变,和绘制.
+
+#### 不规则图形点击事件
+
+* canvas 绘制
+* 图形区分
+    * 像素点取色
+    * `Region`类提供的Path包含判断

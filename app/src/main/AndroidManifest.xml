@@ -15,6 +15,8 @@
             android:supportsRtl="true"
             android:testOnly="false"
             android:theme="@style/AppTheme">
+        <activity android:name=".common.SpecialActivity">
+        </activity>
         <activity android:name=".common.ExplosionActivity">
         </activity>
         <activity android:name=".common.WaterActivity">
