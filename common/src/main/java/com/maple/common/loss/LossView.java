@@ -38,9 +38,11 @@ public class LossView extends View {
     private int strokeWidth = 2;
     private int dy;//小球移动点
     private int ey;//贝塞尔控制点
+
     public LossView(Context context) {
         this(context, null);
     }
+
     public LossView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -91,7 +93,15 @@ public class LossView extends View {
         canvas.drawPath(path, mPaint);
     }
 
-    public void start() {
+    private AnimatorSet anim;
+
+    private void start() {
+        if (anim == null) anim = initAnim();
+        mRuning = true;
+        anim.start();
+    }
+
+    private AnimatorSet initAnim() {
         ValueAnimator pointAnim = ValueAnimator.ofFloat(0, 1);
         pointAnim.addUpdateListener(anim -> {
             float t = anim.getAnimatedFraction();
@@ -134,7 +144,7 @@ public class LossView extends View {
         set.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                mRuning = true;
+
             }
 
             @Override
@@ -152,7 +162,7 @@ public class LossView extends View {
 
             }
         });
-        set.start();
+        return set;
     }
 
     @Override
