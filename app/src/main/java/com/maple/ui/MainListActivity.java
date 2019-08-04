@@ -58,6 +58,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(SpecialActivity.class));
         mItems.add(new ActivityItem(TreeActivity.class));
         mItems.add(new ActivityItem(LossActivity.class));
+        mItems.add(new ActivityItem(SlidActivity.class));
         return mItems;
     }
 }
