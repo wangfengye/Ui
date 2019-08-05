@@ -76,5 +76,8 @@
  #### 震荡动画
  > 贝塞尔曲线应用,组合动画,动画插值器,震荡函数,自由落体.
 
-  #### 卡片列表滑动
+ #### 卡片列表滑动
   > CoordinatorLayout.Behavior, NestedScrollingParent2,NestedScrollingChild2
+
+ #### 浪花加载
+ > 贝塞尔曲线,用`Region`求Path交集的方式来取贝塞尔曲线上的点
