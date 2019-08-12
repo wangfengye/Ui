@@ -81,3 +81,7 @@
 
  #### 浪花加载
  > 贝塞尔曲线,用`Region`求Path交集的方式来取贝塞尔曲线上的点
+
+ #### 移形换位
+ > 事件分发(在不重写子VIew前提下,拦截滑动,不拦截点击事件);`ViewDragHelper`拖拽帮助类使用;
+ `onMeasure`,`onLayout`彻底重写实现子View的padding.margin.

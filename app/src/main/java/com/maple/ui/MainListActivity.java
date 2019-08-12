@@ -60,6 +60,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(LossActivity.class));
         mItems.add(new ActivityItem(SlidActivity.class));
         mItems.add(new ActivityItem(WaveActivity.class));
+        mItems.add(new ActivityItem(DragImageGroupActivity.class));
         return mItems;
     }
 }
