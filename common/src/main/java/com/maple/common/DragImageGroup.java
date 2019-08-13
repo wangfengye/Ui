@@ -26,6 +26,8 @@ public class DragImageGroup extends LinearLayout {
     private static final int INTERCEPT_TIME_SLOP = 200;//onClick事件时间阈值
     private View mDragView;
     private boolean dragging;
+    private int mTouchedY;
+    private int mTouchedX;
 
     public DragImageGroup(Context context) {
         this(context, null);
@@ -131,10 +133,12 @@ public class DragImageGroup extends LinearLayout {
             int margin = 2 * 3;
             View child = views.get(i);
             if (dragging&&child.getTag() != null && child.getTag().equals(DRAGGING_VIEW)) {
-                child.layout(margin + marginLeft + child.getMeasuredWidth() / 4,
+                child.layout(mTouchedX-child.getMeasuredWidth()/4,mTouchedY-child.getMeasuredHeight()/4
+                ,mTouchedX+child.getMeasuredWidth()/4,mTouchedY+child.getMeasuredHeight()/4);
+               /* child.layout(margin + marginLeft + child.getMeasuredWidth() / 4,
                         margin + child.getMeasuredHeight() / 4,
                         margin + child.getMeasuredWidth() + marginLeft - child.getMeasuredWidth() / 4,
-                        margin + child.getMeasuredHeight() - child.getMeasuredHeight() / 4);
+                        margin + child.getMeasuredHeight() - child.getMeasuredHeight() / 4);*/
             } else {
                 child.layout(margin + marginLeft, margin, margin + child.getMeasuredWidth() + marginLeft, margin + child.getMeasuredHeight());
             }
@@ -151,6 +155,8 @@ public class DragImageGroup extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        mTouchedX= (int) event.getX();
+        mTouchedY= (int) event.getY();
         mDragger.processTouchEvent(event);
         return true;
     }
