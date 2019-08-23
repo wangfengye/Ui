@@ -15,6 +15,8 @@
             android:supportsRtl="true"
             android:testOnly="false"
             android:theme="@style/AppTheme">
+        <activity android:name=".common.EmailActivity">
+        </activity>
         <activity android:name=".common.DragImageGroupActivity">
         </activity>
         <activity android:name=".common.WaveActivity">

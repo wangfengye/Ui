@@ -85,3 +85,6 @@
  #### 移形换位
  > 事件分发(在不重写子VIew前提下,拦截滑动,不拦截点击事件);`ViewDragHelper`拖拽帮助类使用;
  `onMeasure`,`onLayout`彻底重写实现子View的padding.margin.
+
+#### 曲线图形阴影
+> `Paint.setShadowLayer`添加阴影,贝塞尔曲线
