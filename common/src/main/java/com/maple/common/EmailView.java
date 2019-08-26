@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
@@ -41,6 +42,9 @@ public class EmailView extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {        super.onDraw(canvas);
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1){// 8.1以下关闭硬件加速
+            setLayerType(LAYER_TYPE_SOFTWARE, null);
+        }
         int w = getWidth();
         int h = getHeight();
         mPath.moveTo(0, 0 + 10);
