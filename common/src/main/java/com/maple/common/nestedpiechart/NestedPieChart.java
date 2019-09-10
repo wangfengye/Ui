@@ -20,6 +20,7 @@ import java.util.List;
  * @Description:
  */
 public class NestedPieChart extends View {
+    public static final String TAG = "NestedPieChart";
     private List<NestPie> innerList = new ArrayList<>();
     private List<NestPie> outerList = new ArrayList<>();
     private Paint paintText;
@@ -100,7 +101,7 @@ public class NestedPieChart extends View {
 
     private void drawOuterCircle(Canvas canvas, float outerRadius) {
         int totalNumber = 0;
-        int currentStartAngle = -90;
+        float currentStartAngle = -90;
         if (!outerList.isEmpty()) {
             // 求总数
             for (NestPie nestPie : outerList) {
@@ -110,10 +111,13 @@ public class NestedPieChart extends View {
             // 设置百分比，角度
             for (NestPie nestPie : outerList) {
                 int number = nestPie.getNumber();
-                float percentage = ((float) number) / ((float) totalNumber);
-                float angle = percentage * 360;
+               /* float percentage = ((float) number) / ((float) totalNumber);
+                float angle = percentage * 360;*/
+               // 先乘再除减少精度损失.
+               float angle = ((float) number)*360 / ((float) totalNumber);
                 paintCircle.setColor(getResources().getColor(nestPie.getColor()));
                 // 绘制扇形
+                Log.i(TAG, "drawOuterCircle: "+currentStartAngle +"---"+angle);
                 canvas.drawArc(outerRectF, currentStartAngle, angle, true, paintCircle);
                 float textAngle = currentStartAngle + angle / 2;
                 paintCircle.setColor(getResources().getColor(nestPie.getLineColor()));
