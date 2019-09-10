@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1677D2</color>
+    <color name="colorPrimaryDark">#1677D2</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 统一常见颜色 -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#FF2626</color>
+    <color name="blue">#4056AB</color>
+    <color name="black">#000000</color>
+    <color name="gray">#888888</color>
+    <color name="gray_light">#F1F1F1</color>
+
+    <!-- 统一文字颜色 -->
+    <color name="text_color_theme">@color/colorPrimaryDark</color>
+    <color name="text_color_main">#000000</color>
+    <color name="text_color_child">#6A6A6A</color>
+    <color name="text_color_small_child">#C1C1C1</color>
+    <color name="colorPrimaryTransparent">#5099cc00</color>
+    <color name="alphaWhite">#50ffffff</color>
+
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#8BC34A</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="transparent_divider">#50BDBDBD</color>
+
+    <color name="grey8">#888888</color>
+    <color name="grey7">#c1c0c0</color>
+    <color name="grey2">#efeeee</color>
+    <color name="blue_new">#122374</color>
+    <color name="bg_gray">#e1e1e1</color>
+    <color name="blue9">#558aec</color>
+    <color name="font_gray">#707070</color>
+
+    <color name="snow">#FFFAFA</color><!--雪白色 -->
+    <color name="peachpuff">#FFDAB9</color><!--桃色 -->
+    <color name="salmon">#FA8072</color><!--鲜肉色 -->
+    <color name="mintcream">#F5FFFA</color><!--薄荷色 -->
+    <color name="whitesmoke">#F5F5F5</color><!--烟白色 -->
+    <color name="beige">#F5F5DC</color><!--米色 -->
+    <color name="lightgray">#F5F5F5</color><!--亮灰色 -->
+    <color name="darkgray">#A9A9A9</color><!--暗灰色 -->
+    <color name="dimgray">#696969</color><!--暗灰色 -->
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="line">#ffd3dde6</color>
+    <color name="title">#1677D2</color>
+    <color name="yellow">@android:color/holo_orange_dark</color>
+    <color name="topbar_3">#339EFE</color>
+    <color name="text_10">#333333</color>
+    <color name="text_11">#999999</color>
+    <color name="gray_bg">#f8f8f8</color>
+    <color name="button_enable_false">#D4D4D4</color>
+    <color name="battery_normal_color">#ffffea00</color>
+    <color name="battery_bg_color">#ff544645</color>
+
+    <color name="color1">#4075FF</color>
+    <color name="color2">#37C2BF</color>
+    <color name="color3">#B8E4FF</color>
+    <color name="color4">#82C6FD</color>
+    <color name="color5">#77E3E1</color>
+    <color name="color6">#ABF5F3</color>
+    <color name="color7">#8FE1A0</color>
+    <color name="color8">#6E93F1</color>
+    <color name="color9">#3A3A3A</color>
+    <color name="color10">#E0E0E0</color>
+
+</resources>
