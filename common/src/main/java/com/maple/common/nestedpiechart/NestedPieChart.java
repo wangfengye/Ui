@@ -182,7 +182,7 @@ public class NestedPieChart extends View {
 
     private void drawInnerCycle(Canvas canvas, float innerRadius) {
         int totalNumber = 0;
-        int currentStartAngle = -90;
+        float currentStartAngle = -90;
         if (!innerList.isEmpty()) {
             // 求总数
             for (NestPie nestPie : innerList) {
