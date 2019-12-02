@@ -1,71 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.maple.ui">
+    package="com.maple.ui">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name=".MainApp"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:testOnly="false"
-            android:theme="@style/AppTheme">
-        <activity android:name=".common.EmailActivity">
-        </activity>
-        <activity android:name=".common.DragImageGroupActivity">
-        </activity>
-        <activity android:name=".common.WaveActivity">
-        </activity>
-        <activity android:name=".common.SlidActivity">
-        </activity>
-        <activity android:name=".common.LossActivity">
-        </activity>
-        <activity android:name=".common.TreeActivity">
-        </activity>
-        <activity android:name=".common.SpecialActivity">
-        </activity>
-        <activity android:name=".common.ExplosionActivity">
-        </activity>
-        <activity android:name=".common.WaterActivity">
-        </activity>
-        <activity android:name=".anim.MainActivity"/>
-        <activity android:name=".GithubView.GithubViewActivity"/>
-        <activity android:name=".ChartActivity"/>
-        <activity android:name=".sizeAdapter.SizeAdapterActivity"/>
+        android:name=".MainApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="false"
+        android:theme="@style/AppTheme">
+        <activity android:name=".PaletteActivity"></activity>
+        <activity android:name=".common.EmailActivity"></activity>
+        <activity android:name=".common.DragImageGroupActivity"></activity>
+        <activity android:name=".common.WaveActivity"></activity>
+        <activity android:name=".common.SlidActivity"></activity>
+        <activity android:name=".common.LossActivity"></activity>
+        <activity android:name=".common.TreeActivity"></activity>
+        <activity android:name=".common.SpecialActivity"></activity>
+        <activity android:name=".common.ExplosionActivity"></activity>
+        <activity android:name=".common.WaterActivity"></activity>
+        <activity android:name=".anim.MainActivity" />
+        <activity android:name=".GithubView.GithubViewActivity" />
+        <activity android:name=".ChartActivity" />
+        <activity android:name=".sizeAdapter.SizeAdapterActivity" />
         <activity android:name=".MainListActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".circleImage.CircleImageActivity"/>
-        <activity android:name=".timeSelector.TimeSelectorActivity"/>
-        <activity android:name=".overlapping.OverlappingActivity"/>
-        <activity android:name=".MarkActivity"/>
+        <activity android:name=".circleImage.CircleImageActivity" />
+        <activity android:name=".timeSelector.TimeSelectorActivity" />
+        <activity android:name=".overlapping.OverlappingActivity" />
+        <activity android:name=".MarkActivity" />
 
         <meta-data
-                android:name="w"
-                android:value="12"/>
+            android:name="w"
+            android:value="12" />
 
-        <activity android:name=".sizeAdapter.Size2Activity"/>
-        <activity android:name=".common.CommonActivity"/>
-        <activity android:name=".common.DelEditTextActivity">
-        </activity>
-        <activity android:name=".common.StarrySkyActivity">
-        </activity>
-        <activity android:name=".common.BezierActivity">
-        </activity>
-        <activity android:name=".common.DreamActivity">
-        </activity>
-        <activity android:name=".common.HandlerWriteActivity">
-        </activity>
-        <activity android:name=".common.NestedPieActivity"/>
+        <activity android:name=".sizeAdapter.Size2Activity" />
+        <activity android:name=".common.CommonActivity" />
+        <activity android:name=".common.DelEditTextActivity"></activity>
+        <activity android:name=".common.StarrySkyActivity"></activity>
+        <activity android:name=".common.BezierActivity"></activity>
+        <activity android:name=".common.DreamActivity"></activity>
+        <activity android:name=".common.HandlerWriteActivity"></activity>
+        <activity android:name=".common.NestedPieActivity" />
     </application>
 
 </manifest>

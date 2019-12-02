@@ -63,6 +63,7 @@ public class MainListActivity extends AppCompatActivity {
         mItems.add(new ActivityItem(DragImageGroupActivity.class));
         mItems.add(new ActivityItem(EmailActivity.class));
         mItems.add(new ActivityItem(NestedPieActivity.class));
+        mItems.add(new ActivityItem(PaletteActivity.class));
         return mItems;
     }
 }

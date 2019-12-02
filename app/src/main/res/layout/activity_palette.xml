@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaletteActivity"
+>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<ImageView
+    android:id="@+id/img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@android:mipmap/sym_def_app_icon"
+    />
+
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/VibrantColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VibrantColor"/>
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/LightVibrantColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LightVibrantColor"/>
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/DarkVibrantColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DarkVibrantColor"/>
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/MutedColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MutedColor"/>
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/LightMutedColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LightMutedColor"/>
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/DarkMutedColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DarkMutedColor"/>
+</LinearLayout></ScrollView>

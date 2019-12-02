@@ -44,4 +44,5 @@ dependencies {
     //高斯模糊
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+    implementation 'com.android.support:palette-v7:27.1.1'
 }
